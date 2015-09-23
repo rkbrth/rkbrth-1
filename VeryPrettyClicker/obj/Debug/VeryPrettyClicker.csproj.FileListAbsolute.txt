@@ -1,0 +1,10 @@
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.exe.config
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.exe
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.pdb
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csprojResolveAssemblyReference.cache
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.MainForm.resources
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.Properties.Resources.resources
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csproj.GenerateResource.Cache
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.exe
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.pdb
+c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.WindowForm.resources
