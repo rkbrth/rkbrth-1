@@ -19,7 +19,7 @@ namespace VeryPrettyClicker.Utilities
             this.pid = pid;
             process = Process.GetProcessById(pid);
         }
-        
+
         public Rectangle Bounds
         {
             get
@@ -29,5 +29,7 @@ namespace VeryPrettyClicker.Utilities
                 return new Rectangle(bounds.left, bounds.top, bounds.right - bounds.left, bounds.bottom - bounds.top);
             }
         }
+
+        public IntPtr MainWindowHandle { get { process = Process.GetProcessById(pid); return process.MainWindowHandle; } }
     }
 }

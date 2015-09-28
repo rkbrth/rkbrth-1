@@ -55,6 +55,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GameWindow.cs" />
+    <Compile Include="Utilities\GlobalKeyboardHook.cs" />
+    <Compile Include="Utilities\KeyCombo.cs" />
     <Compile Include="Utilities\ProcessWatcher.cs" />
     <Compile Include="Utilities\User32.cs" />
     <Compile Include="WindowForm.cs">
