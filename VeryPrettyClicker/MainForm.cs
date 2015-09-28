@@ -49,7 +49,7 @@ namespace VeryPrettyClicker
             watcher.Remove += Watcher_Remove;
             watcher.Init("l2.bin");
             hook = new GlobalKeyboardHook();
-            hook.addCombo(new KeyCombo(new Keys[] { Keys.LShiftKey, Keys.Q })).ComboPressed += ComboPressed_ShiftQ;
+            hook.addCombo(new KeyCombo(new Keys[] { Keys.LControlKey, Keys.Q })).ComboPressed += ComboPressed_CtrlQ;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -66,7 +66,7 @@ namespace VeryPrettyClicker
             }
         }
 
-        private void ComboPressed_ShiftQ(object sender, KeyEventArgs e)
+        private void ComboPressed_CtrlQ(object sender, KeyEventArgs e)
         {
             IntPtr active = GetForegroundWindow();
             foreach (WindowForm form in forms.Values)

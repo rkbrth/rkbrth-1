@@ -13,11 +13,12 @@ namespace VeryPrettyClicker
         private System.Timers.Timer positionTimer;
         private Rectangle _bounds;
 
-        public List<Label>[] buttons = new List<Label>[3];
+        public List<ClickerLabel>[] buttons = new List<ClickerLabel>[3];
 
         public WindowForm()
         {
             InitializeComponent();
+            InitControls();
         }
 
         private void WindowForm_Load(object sender, EventArgs e)
@@ -25,6 +26,7 @@ namespace VeryPrettyClicker
             positionTimer = new System.Timers.Timer(500);
             positionTimer.Elapsed += PositionTimer_Elapsed;
             positionTimer.Start();
+            ExpandState = 1;
         }
 
         #region Follow main window
@@ -107,36 +109,48 @@ namespace VeryPrettyClicker
 
         private void InitControls()
         {
-            InitRow1();
-        }
-
-        private void InitRow1()
-        {
             ControlsSettings s = new ControlsSettings();
-            s.btnMargin = 0;
-            s.startX = 0;
-            s.startY = 0;
-            s.btnWidth = 40;
-            s.btnHeight = 40;
+            s.btnMargin = 3;
+            s.startX = 21;
+            s.btnSize = new Size(34, 34);
             s.parent = this;
-            s.index = 0;
-            InitRow(s);
+
+            for (int i = 0; i < 3; i++)
+            {
+                s.startY = 7 + (46 * (2 - i));
+                InitRow(i, s);
+            }
         }
 
-        private void InitRow2()
+        private void InitRow(int index, ControlsSettings settings)
         {
-
+            buttons[index] = new List<ClickerLabel>();
+            for (int i = 0; i < 12; i++)
+            {
+                ClickerLabel l = new ClickerLabel();
+                l.AutoSize = false;
+                l.Size = settings.btnSize;
+                l.Cursor = Cursors.Hand;
+                l.BackColor = Color.Transparent;
+                l.ForeColor = Color.FromArgb(220, 218, 202);
+                l.TextAlign = ContentAlignment.BottomCenter;
+                l.Font = new System.Drawing.Font("Open Sans", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                l.Tag = new int[] { index, i };
+                l.IsActive = true;
+                l.Location = new Point(settings.startX + (settings.btnSize.Width + settings.btnMargin) * i + (int)Math.Floor((float)i / 4) * 5, (settings.startY));
+                l.Click += btn_Click;
+                buttons[index].Add(l);
+                settings.parent.Controls.Add(l);
+                
+            }
         }
 
-        private void InitRow3()
+        void btn_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void InitRow(ControlsSettings settings)
-        {
-            buttons[settings.index].Clear();
-
+            ClickerLabel l = sender as ClickerLabel;
+            MouseEventArgs ev = e as MouseEventArgs;
+            if (ev.Button == System.Windows.Forms.MouseButtons.Left) 
+                l.IsActive = !l.IsActive;
         }
 
         struct ControlsSettings
@@ -144,10 +158,33 @@ namespace VeryPrettyClicker
             public int btnMargin;
             public int startX;
             public int startY;
-            public int btnWidth;
-            public int btnHeight;
-            public int index;
+            public Size btnSize;
             public Control parent;
         }
+
+        #region Expand panels
+        private int _expandState;
+        private int ExpandState 
+        {
+            get { return _expandState; }
+            set 
+            { 
+                value = (value - 1) % 3 + 1;
+                _expandState = value;
+                Height = 46 * value;
+                for (int i = 0; i < 3; i++ )
+                {
+                    foreach (ClickerLabel l in buttons[i])
+                    {
+                        l.Location = new Point(l.Location.X, 7 + (46 * (_expandState - 3 + 2 - i)));
+                    }
+                }
+            }
+        }
+        private void panelExpand_Click(object sender, EventArgs e)
+        {
+            ExpandState++;
+        }
+        #endregion
     }
 }

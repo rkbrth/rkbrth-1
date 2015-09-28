@@ -8,3 +8,14 @@ c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPretty
 c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.exe
 c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.pdb
 c:\users\user\documents\visual studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.WindowForm.resources
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.exe.config
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.exe
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.pdb
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.exe
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\bin\Debug\VeryPrettyClicker.pdb
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.MainForm.resources
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.Properties.Resources.resources
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.WindowForm.resources
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csproj.GenerateResource.Cache
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.IntervalPicker.resources
