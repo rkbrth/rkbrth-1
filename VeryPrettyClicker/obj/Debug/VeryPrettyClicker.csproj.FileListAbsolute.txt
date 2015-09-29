@@ -19,3 +19,4 @@ C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyCli
 C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csproj.GenerateResource.Cache
 C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\VeryPrettyClick\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.IntervalPicker.resources
+C:\Users\User\Documents\Visual Studio 2015\Projects\VeryPrettyClicker\VeryPrettyClicker\obj\Debug\VeryPrettyClicker.IntervalPicker.resources

@@ -134,7 +134,7 @@ namespace VeryPrettyClicker
                 l.BackColor = Color.Transparent;
                 l.ForeColor = Color.FromArgb(220, 218, 202);
                 l.TextAlign = ContentAlignment.BottomCenter;
-                l.Font = new System.Drawing.Font("Open Sans", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                l.Font = new Font("Open Sans", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(204)));
                 l.Tag = new int[] { index, i };
                 l.IsActive = true;
                 l.Location = new Point(settings.startX + (settings.btnSize.Width + settings.btnMargin) * i + (int)Math.Floor((float)i / 4) * 5, (settings.startY));
@@ -149,7 +149,7 @@ namespace VeryPrettyClicker
         {
             ClickerLabel l = sender as ClickerLabel;
             MouseEventArgs ev = e as MouseEventArgs;
-            if (ev.Button == System.Windows.Forms.MouseButtons.Left) 
+            if (ev.Button == MouseButtons.Left && ev.Clicks == 1) 
                 l.IsActive = !l.IsActive;
         }
 
