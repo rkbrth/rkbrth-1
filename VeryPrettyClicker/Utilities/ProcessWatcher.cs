@@ -20,7 +20,7 @@ namespace VeryPrettyClicker.Utilities
         public void Init(string process_name)
         {
             this.process_name = process_name;
-
+            
             foreach (Process process in Process.GetProcessesByName(process_name))
             {
                 if (Add != null)

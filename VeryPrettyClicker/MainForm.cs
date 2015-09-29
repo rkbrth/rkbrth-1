@@ -47,7 +47,7 @@ namespace VeryPrettyClicker
             watcher = new ProcessWatcher();
             watcher.Add += Watcher_Add;
             watcher.Remove += Watcher_Remove;
-            watcher.Init("l2.bin");
+            watcher.Init("l2");
             hook = new GlobalKeyboardHook();
             hook.addCombo(new KeyCombo(new Keys[] { Keys.LControlKey, Keys.Q })).ComboPressed += ComboPressed_CtrlQ;
         }

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -68,8 +70,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GameWindow.cs" />
     <Compile Include="Utilities\GlobalKeyboardHook.cs" />
+    <Compile Include="Utilities\HandleCollectorR.cs" />
     <Compile Include="Utilities\KeyCombo.cs" />
+    <Compile Include="Utilities\NativeMethodsR.cs" />
     <Compile Include="Utilities\ProcessWatcher.cs" />
+    <Compile Include="Utilities\SafeNativeMethodsR.cs" />
+    <Compile Include="Utilities\SendKeysR.cs" />
+    <Compile Include="Utilities\SendWinKey.cs" />
+    <Compile Include="Utilities\SR1.cs" />
+    <Compile Include="Utilities\UnsafeNativeMethodsR.cs" />
     <Compile Include="Utilities\User32.cs" />
     <Compile Include="WindowForm.cs">
       <SubType>Form</SubType>

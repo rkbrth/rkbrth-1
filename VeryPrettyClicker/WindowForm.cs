@@ -135,22 +135,28 @@ namespace VeryPrettyClicker
                 l.ForeColor = Color.FromArgb(220, 218, 202);
                 l.TextAlign = ContentAlignment.BottomCenter;
                 l.Font = new Font("Open Sans", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(204)));
-                l.Tag = new int[] { index, i };
+                string key = (index == 0 ? "F" : (index == 2 ? "NUMPAD" : "")) + (i + 1);
+                int scanCode;
+                SendWinKey.tryParse(key, out scanCode);
+                l.Tag = scanCode;
                 l.IsActive = true;
                 l.Location = new Point(settings.startX + (settings.btnSize.Width + settings.btnMargin) * i + (int)Math.Floor((float)i / 4) * 5, (settings.startY));
-                l.Click += btn_Click;
+                l.Elapsed += labelTimer_Elapsed;
                 buttons[index].Add(l);
                 settings.parent.Controls.Add(l);
-                
             }
         }
 
-        void btn_Click(object sender, EventArgs e)
+        void labelTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            ClickerLabel l = sender as ClickerLabel;
-            MouseEventArgs ev = e as MouseEventArgs;
-            if (ev.Button == MouseButtons.Left && ev.Clicks == 1) 
-                l.IsActive = !l.IsActive;
+            int scanCode = int.Parse((sender as ClickerLabel).Tag.ToString());
+            try
+            {
+                //SendWinKey.Send(gameWindow.pid, scanCode);
+                //SendWinKey.Click(gameWindow.MainWindowHandle, new Point(100, 100));
+                SendKeysR.Send("{4}", gameWindow.MainWindowHandle);
+            }
+            catch (Exception ex){ }
         }
 
         struct ControlsSettings

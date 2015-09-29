@@ -11,7 +11,7 @@ namespace VeryPrettyClicker.Utilities
 {
     public class GameWindow
     {
-        int pid;
+        public int pid;
         Process process;
 
         public GameWindow(int pid)
