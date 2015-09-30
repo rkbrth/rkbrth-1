@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 using VeryPrettyClicker.Utilities;
 
 namespace VeryPrettyClicker
@@ -15,6 +16,52 @@ namespace VeryPrettyClicker
 
         public List<ClickerLabel>[] buttons = new List<ClickerLabel>[3];
 
+        private bool _onlyForeground;
+        public bool OnlyForeground
+        {
+            get { return _onlyForeground; }
+            set { _onlyForeground = value; }
+        }
+
+        private bool _forceForeground;
+        public bool ForceForeground
+        {
+            get { return _forceForeground; }
+            set { _forceForeground = value; }
+        }
+
+        private bool _block;
+        public bool Block
+        {
+            get { return _block; }
+            set
+            {
+                _block = value;
+                blockPanel.Visible = value;
+                if (value)
+                {
+                    stopBlockPanel.BackgroundImage = VeryPrettyClicker.Properties.Resources.icon_unlocked;
+                }
+                else
+                {
+                    stopBlockPanel.BackgroundImage = VeryPrettyClicker.Properties.Resources.icon_locked;
+                }
+            }
+        }
+
+
+        private int _windowIndex;
+        public int WindowIndex
+        {
+            get { return _windowIndex; }
+            set
+            {
+                _windowIndex = value;
+                labelHotkey.Text = "Alt + " + (value + 1);
+                toolTip.SetToolTip(stopBlockPanel, "Alt + " + (value + 1));
+            }
+        }
+
         public WindowForm()
         {
             InitializeComponent();
@@ -23,6 +70,7 @@ namespace VeryPrettyClicker
 
         private void WindowForm_Load(object sender, EventArgs e)
         {
+            Block = false;
             positionTimer = new System.Timers.Timer(500);
             positionTimer.Elapsed += PositionTimer_Elapsed;
             positionTimer.Start();
@@ -136,9 +184,7 @@ namespace VeryPrettyClicker
                 l.TextAlign = ContentAlignment.BottomCenter;
                 l.Font = new Font("Open Sans", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(204)));
                 string key = (index == 0 ? "F" : (index == 2 ? "NUMPAD" : "")) + (i + 1);
-                int scanCode;
-                SendWinKey.tryParse(key, out scanCode);
-                l.Tag = scanCode;
+                l.Tag = key;
                 l.IsActive = true;
                 l.Location = new Point(settings.startX + (settings.btnSize.Width + settings.btnMargin) * i + (int)Math.Floor((float)i / 4) * 5, (settings.startY));
                 l.Elapsed += labelTimer_Elapsed;
@@ -149,12 +195,36 @@ namespace VeryPrettyClicker
 
         void labelTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            int scanCode = int.Parse((sender as ClickerLabel).Tag.ToString());
+            if (Block)
+                return;
+            string key = (sender as ClickerLabel).Tag.ToString();
             try
             {
-                //SendWinKey.Send(gameWindow.pid, scanCode);
+                if (OnlyForeground)
+                {
+                    if (ForceForeground && this.Handle != GetForegroundWindow())
+                    {
+                        SetForegroundWindow(gameWindow.MainWindowHandle);
+                        int sleep = 0;
+                        while (GetForegroundWindow() != gameWindow.MainWindowHandle && sleep < 500)
+                        {
+                            System.Threading.Thread.Sleep(20);
+                            sleep += 20;
+                        }
+                    }
+                    if (ForceForeground || GetForegroundWindow() == gameWindow.MainWindowHandle)
+                    {
+                        SendKeysR.Send("{" + key + "}", gameWindow.MainWindowHandle);
+                    }
+                }
+                else
+                {
+                    int scanCode;
+                    SendWinKey.tryParse(key, out scanCode);
+                    SendWinKey.Send(gameWindow.pid, scanCode);
+                }
                 //SendWinKey.Click(gameWindow.MainWindowHandle, new Point(100, 100));
-                SendKeysR.Send("{4}", gameWindow.MainWindowHandle);
+                
             }
             catch (Exception ex){ }
         }
@@ -167,6 +237,13 @@ namespace VeryPrettyClicker
             public Size btnSize;
             public Control parent;
         }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool SetForegroundWindow(IntPtr hWnd);
 
         #region Expand panels
         private int _expandState;
@@ -192,5 +269,10 @@ namespace VeryPrettyClicker
             ExpandState++;
         }
         #endregion
+
+        private void stopBlockPanel_Click(object sender, EventArgs e)
+        {
+            Block = !Block;
+        }
     }
 }

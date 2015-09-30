@@ -22,7 +22,7 @@ namespace System.Windows.Forms
     /// <filterpriority>2</filterpriority>
     public class SendKeysR
     {
-        private static SendKeysR.KeywordVk[] keywords = new SendKeysR.KeywordVk[49]
+        private static SendKeysR.KeywordVk[] keywords = new SendKeysR.KeywordVk[65]
     {
       new SendKeysR.KeywordVk("ENTER", 13),
       new SendKeysR.KeywordVk("TAB", 9),
@@ -72,7 +72,23 @@ namespace System.Windows.Forms
       new SendKeysR.KeywordVk("DIVIDE", 111),
       new SendKeysR.KeywordVk("+", 107),
       new SendKeysR.KeywordVk("%", 65589),
-      new SendKeysR.KeywordVk("^", 65590)
+      new SendKeysR.KeywordVk("^", 65590),
+      new SendKeysR.KeywordVk("NUMPAD0",0x60),   //Numeric keypad 0 key 
+        new SendKeysR.KeywordVk("NUMPAD1",0x61),   //Numeric keypad 1 key 
+        new SendKeysR.KeywordVk("NUMPAD2",0x62),   //Numeric keypad 2 key 
+        new SendKeysR.KeywordVk("NUMPAD3",0x63),   //Numeric keypad 3 key 
+        new SendKeysR.KeywordVk("NUMPAD4",0x64),   //Numeric keypad 4 key 
+        new SendKeysR.KeywordVk("NUMPAD5",0x65),   //Numeric keypad 5 key 
+        new SendKeysR.KeywordVk("NUMPAD6",0x66),   //Numeric keypad 6 key 
+        new SendKeysR.KeywordVk("NUMPAD7",0x67),   //Numeric keypad 7 key 
+        new SendKeysR.KeywordVk("NUMPAD8",0x68),   //Numeric keypad 8 key 
+        new SendKeysR.KeywordVk("NUMPAD9",0x69),   //Numeric keypad 9 key 
+        new SendKeysR.KeywordVk("NUMPAD10",0x60),   //Numeric keypad 0 key 
+        new SendKeysR.KeywordVk("NUMPAD11",0x6F),   //Divide key
+        new SendKeysR.KeywordVk("NUMPAD12",0x6A),   //Decimal key 
+        new SendKeysR.KeywordVk("10",0x30),   //Decimal key 
+        new SendKeysR.KeywordVk("11",0xBD),   //Decimal key 
+        new SendKeysR.KeywordVk("12",0xBB)   //Decimal key 
     };
         private static SendKeysR.SendMethodTypes? sendMethod = new SendKeysR.SendMethodTypes?();
         private static bool? hookSupported = new bool?();

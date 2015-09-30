@@ -129,6 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1442605614_Lineage.ico" />
+    <None Include="Resources\icon_locked.png" />
+    <None Include="Resources\icon_unlocked.png" />
+    <None Include="Resources\lock-outline.png" />
     <None Include="Resources\button_ok.png" />
     <None Include="Resources\stroke.png" />
   </ItemGroup>

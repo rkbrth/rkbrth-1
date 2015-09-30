@@ -15,6 +15,35 @@ namespace VeryPrettyClicker
         private GlobalKeyboardHook hook;
         WinEventDelegate dele = null;
 
+        private bool _onlyForeground;
+        public bool OnlyForeground
+        {
+            get { return _onlyForeground; }
+            set 
+            { 
+                _onlyForeground = value;
+                foreach (WindowForm form in forms.Values)
+                {
+                    form.OnlyForeground = value;
+                }
+                forceForegroundToolStripMenuItem.Enabled = value;
+            }
+        }
+
+        private bool _forceForeground;
+        public bool ForceForeground
+        {
+            get { return _forceForeground; }
+            set 
+            { 
+                _forceForeground = value;
+                foreach (WindowForm form in forms.Values)
+                {
+                    form.ForceForeground = value;
+                }
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
@@ -44,12 +73,15 @@ namespace VeryPrettyClicker
         private void MainForm_Load(object sender, EventArgs e)
         {
             Location = new Point(-Width, -Height);
+            OnlyForeground = onlyForegroundToolStripMenuItem.Checked;
+            ForceForeground = forceForegroundToolStripMenuItem.Checked;
             watcher = new ProcessWatcher();
             watcher.Add += Watcher_Add;
             watcher.Remove += Watcher_Remove;
-            watcher.Init("l2");
+            watcher.Init();
             hook = new GlobalKeyboardHook();
-            hook.addCombo(new KeyCombo(new Keys[] { Keys.LControlKey, Keys.Q })).ComboPressed += ComboPressed_CtrlQ;
+            hook.addCombo(new KeyCombo(new Keys[] { Keys.LMenu, Keys.Q })).ComboPressed += ComboPressed_AltQ;
+            hook.addCombo(new KeyCombo(new Keys[] { Keys.LMenu, Keys.W })).ComboPressed += ComboPressed_AltW;
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -66,7 +98,7 @@ namespace VeryPrettyClicker
             }
         }
 
-        private void ComboPressed_CtrlQ(object sender, KeyEventArgs e)
+        private void ComboPressed_AltQ(object sender, KeyEventArgs e)
         {
             IntPtr active = GetForegroundWindow();
             foreach (WindowForm form in forms.Values)
@@ -74,6 +106,18 @@ namespace VeryPrettyClicker
                 if (form.gameWindow.MainWindowHandle == active || form.Handle == active)
                 {
                     form.HotkeyActivated = !form.HotkeyActivated;
+                }
+            }
+        }
+
+        private void ComboPressed_AltW(object sender, KeyEventArgs e)
+        {
+            IntPtr active = GetForegroundWindow();
+            foreach (WindowForm form in forms.Values)
+            {
+                if (form.gameWindow.MainWindowHandle == active || form.Handle == active)
+                {
+                    form.Block = !form.Block;
                 }
             }
         }
@@ -95,8 +139,10 @@ namespace VeryPrettyClicker
                 winForm.gameWindow = new GameWindow(updated_item);
                 winForm.ShowInTaskbar = false;
                 winForm.TopMost = true;
-                
 
+                winForm.OnlyForeground = OnlyForeground;
+                winForm.ForceForeground = ForceForeground;
+                winForm.WindowIndex = forms.Count;
                 // Set deafult start position
                 winForm.StartPosition = FormStartPosition.Manual;
                 Rectangle bounds = winForm.gameWindow.Bounds;
@@ -123,6 +169,11 @@ namespace VeryPrettyClicker
             }
             
             forms.Remove(updated_item);
+
+            for (int i = 0; i < forms.Count; i++)
+            {
+                (forms[i] as WindowForm).WindowIndex = i;
+            }
         }
 
         [DllImport("user32.dll")]
@@ -135,5 +186,19 @@ namespace VeryPrettyClicker
 
         private const uint WINEVENT_OUTOFCONTEXT = 0;
         private const uint EVENT_SYSTEM_FOREGROUND = 3;
+
+        private void onlyForegroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem t = sender as ToolStripMenuItem;
+            t.Checked = !t.Checked;
+            OnlyForeground = t.Checked;
+        }
+
+        private void forceForegroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem t = sender as ToolStripMenuItem;
+            t.Checked = !t.Checked;
+            ForceForeground = t.Checked;
+        }
     }
 }

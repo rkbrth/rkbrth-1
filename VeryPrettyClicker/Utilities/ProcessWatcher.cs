@@ -9,22 +9,24 @@ namespace VeryPrettyClicker.Utilities
 {
     public class ProcessWatcher
     {
+        private static string[] process_names = new string[3] {"l2", "l2.exe", "l2.bin"};
         public event WatcherHandler Add;
         public event WatcherHandler Remove;
         public delegate void WatcherHandler(object sender, int updated_item);
 
         private ManagementEventWatcher startWatch;
         private ManagementEventWatcher stopWatch;
-        private string process_name;
+        
 
-        public void Init(string process_name)
+        public void Init()
         {
-            this.process_name = process_name;
-            
-            foreach (Process process in Process.GetProcessesByName(process_name))
+            foreach (string process_name in ProcessWatcher.process_names)
             {
-                if (Add != null)
-                    Add(this, process.Id);
+                foreach (Process process in Process.GetProcessesByName(process_name))
+                {
+                    if (Add != null)
+                        Add(this, process.Id);
+                }
             }
 
             startWatch = new ManagementEventWatcher(new WqlEventQuery("SELECT * FROM Win32_ProcessStartTrace"));
@@ -55,12 +57,12 @@ namespace VeryPrettyClicker.Utilities
             {
                 return false;
             }
-            return test.MainWindowHandle != IntPtr.Zero && test.ProcessName.ToLower() == process_name.ToLower();
+            return test.MainWindowHandle != IntPtr.Zero && ProcessWatcher.process_names.Contains(test.ProcessName.ToLower());
         }
 
         private void stopWatch_EventArrived(object sender, EventArrivedEventArgs e)
         {
-            if (e.NewEvent.Properties["ProcessName"].Value.ToString().ToLower() == this.process_name.ToLower())
+            if (ProcessWatcher.process_names.Contains(e.NewEvent.Properties["ProcessName"].Value.ToString().ToLower()))
             {
                 int pid = int.Parse(e.NewEvent.Properties["ProcessID"].Value.ToString());
                 if (Remove != null)
@@ -70,7 +72,8 @@ namespace VeryPrettyClicker.Utilities
 
         private void startWatch_EventArrived(object sender, EventArrivedEventArgs e)
         {
-            if (e.NewEvent.Properties["ProcessName"].Value.ToString().ToLower() == this.process_name.ToLower())
+
+            if (ProcessWatcher.process_names.Contains(e.NewEvent.Properties["ProcessName"].Value.ToString().ToLower()))
             {
                 int key = int.Parse(e.NewEvent.Properties["ProcessID"].Value.ToString());
                 if (Add != null)

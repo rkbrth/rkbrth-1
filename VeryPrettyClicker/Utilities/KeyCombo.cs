@@ -24,8 +24,8 @@ namespace VeryPrettyClicker.Utilities
 
             if (keys[level] == key)
                 level++;
-            else
-                level = 0;
+            //else
+                //level = 0;
 
             if (level == keys.Count())
                 ComboPressed(this, new KeyEventArgs(keys.Last()));

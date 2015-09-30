@@ -33,6 +33,8 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.onlyForegroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.forceForegroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,17 +48,35 @@
             // contextMenuStrip
             // 
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.onlyForegroundToolStripMenuItem,
+            this.forceForegroundToolStripMenuItem,
             this.выходToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip1";
-            this.contextMenuStrip.Size = new System.Drawing.Size(109, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(261, 92);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // onlyForegroundToolStripMenuItem
+            // 
+            this.onlyForegroundToolStripMenuItem.Checked = true;
+            this.onlyForegroundToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.onlyForegroundToolStripMenuItem.Name = "onlyForegroundToolStripMenuItem";
+            this.onlyForegroundToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.onlyForegroundToolStripMenuItem.Text = "Только активное окно";
+            this.onlyForegroundToolStripMenuItem.Click += new System.EventHandler(this.onlyForegroundToolStripMenuItem_Click);
+            // 
+            // forceForegroundToolStripMenuItem
+            // 
+            this.forceForegroundToolStripMenuItem.Name = "forceForegroundToolStripMenuItem";
+            this.forceForegroundToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.forceForegroundToolStripMenuItem.Text = "Активировать окно перед кликом";
+            this.forceForegroundToolStripMenuItem.Click += new System.EventHandler(this.forceForegroundToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -82,6 +102,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem onlyForegroundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem forceForegroundToolStripMenuItem;
     }
 }
 

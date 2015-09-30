@@ -73,6 +73,7 @@ namespace VeryPrettyClicker.Utilities
             VK_7 = 0x37,    //7 key 
             VK_8 = 0x38,   //8 key 
             VK_9 = 0x39,    //9 key
+            VK_10 = 0x30,   //0 key 
             VK_11 = 0xBD, // - KEY
             VK_12 = 0xBB,
             VK_MINUS = 0xBD, // - KEY
@@ -113,10 +114,14 @@ namespace VeryPrettyClicker.Utilities
             VK_NUMPAD7 = 0x67,   //Numeric keypad 7 key 
             VK_NUMPAD8 = 0x68,   //Numeric keypad 8 key 
             VK_NUMPAD9 = 0x69,   //Numeric keypad 9 key 
+            VK_NUMPAD10 = 0x60,   //Numeric keypad 0 key 
+            VK_NUMPAD11 = 0x6F,   //Divide key
+            VK_NUMPAD12 = 0x6A,   //Decimal key 
             VK_SEPARATOR = 0x6C,   //Separator key 
             VK_SUBTRACT = 0x6D,   //Subtract key 
             VK_DECIMAL = 0x6E,   //Decimal key 
             VK_DIVIDE = 0x6F,   //Divide key
+            
             VK_F1 = 0x70,   //F1 key 
             VK_F2 = 0x71,   //F2 key 
             VK_F3 = 0x72,   //F3 key 
@@ -178,8 +183,9 @@ namespace VeryPrettyClicker.Utilities
                 throw new Exception("Окно не выбрано");
             }
             PostMessage(handle, (int)WMessages.WM_KEYDOWN, key, 0);
-            System.Threading.Thread.Sleep(10);
-            PostMessage(handle, (int)WMessages.WM_KEYUP, key, 0);
+            System.Windows.Forms.Application.DoEvents();
+            //System.Threading.Thread.Sleep(10);
+            //PostMessage(handle, (int)WMessages.WM_KEYUP, key, 0);
         }
 
         public static void Send(IntPtr handle, int key)
@@ -190,15 +196,14 @@ namespace VeryPrettyClicker.Utilities
             }
 
             PostMessage(handle, (int)WMessages.WM_KEYDOWN, key, 0);
-            //PostMessage(handle, (int)WMessages.WM_KEYUP, key, 0);
         }
 
         public static void Click(IntPtr handle, System.Drawing.Point point)
         {
             int lparam = point.X & 0xFFFF | (point.Y & 0xFFFF) << 16;
-            var r = PostMessage(handle, (int)WMessages.WM_LBUTTONDOWN, lparam, 0);
+            PostMessage(handle, (int)WMessages.WM_LBUTTONDOWN, lparam, 0);
             System.Threading.Thread.Sleep(10);
-            r = PostMessage(handle, (int)WMessages.WM_LBUTTONUP, lparam, 0);
+            PostMessage(handle, (int)WMessages.WM_LBUTTONUP, lparam, 0);
         }
 
         public static bool tryParse(string key, out int scanCode)
